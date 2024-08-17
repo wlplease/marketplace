@@ -1,11 +1,13 @@
 name: Kit Test
+
 on:
   push:
     branches: ['main']
   pull_request:
     branches: ['main']
+
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -15,12 +17,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
 
-      - name: Template Install dependencies
-        run: bun install
+      - name: Install dependencies
+        run: yarn install
 
-      - name: Kit Test
+      - name: Run Tests
         # When fails, please check your tests
-        run: bun run test:coverage
+        run: yarn run test:coverage

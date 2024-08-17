@@ -12,7 +12,7 @@ import type {
 } from '@coinbase/onchainkit/transaction';
 import type { Address, ContractFunctionParameters } from 'viem';
 import {
-  BASE_SEPOLIA_CHAIN_ID,
+  BASE_CHAIN_MAINNET_ID,
   clickContractABI,
   clickContractAddress,
 } from '../constants';
@@ -47,7 +47,7 @@ export default function TransactionWrapper({
         address={address}
         contracts={contracts}
         className="w-[450px]"
-        chainId={BASE_SEPOLIA_CHAIN_ID}
+        chainId={BASE_CHAIN_MAINNET_ID}
         onError={handleError}
         onSuccess={handleSuccess}
       >

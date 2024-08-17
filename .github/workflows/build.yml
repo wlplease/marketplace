@@ -1,9 +1,11 @@
 name: Template Build
+
 on:
   push:
     branches: ['main']
   pull_request:
     branches: ['main']
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,13 +17,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
 
-      - name: Template Install dependencies
-        run: bun install
+      - name: Install dependencies
+        run: yarn install
 
-      - name: Template Test Build
+      - name: Build
         # When fails, please check your build
-        run: |
-          bun run build
+        run: yarn build

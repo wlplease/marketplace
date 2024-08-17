@@ -19,11 +19,11 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Onchain App Template',
-  description: 'Built with OnchainKit',
+  title: 'NOSEA NFT Marketplace',
+  description: 'Explore and trade NFTs on the Base Chain',
   openGraph: {
-    title: 'Onchain App Template',
-    description: 'Built with OnchainKit',
+    title: 'NOSEA NFT Marketplace',
+    description: 'Explore and trade NFTs on the Base Chain',
     images: [`${NEXT_PUBLIC_URL}/vibes/vibes-19.png`],
   },
 };
