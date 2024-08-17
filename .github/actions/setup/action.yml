@@ -49,7 +49,7 @@ runs:
       run: |
         git config --global user.name "wlplease"
         git config --global user.email "wlpleasenft@gmail.com"
-        git remote add origin https://github.com/wlplease/onchain.git
+        git remote set-url origin https://github.com/wlplease/marketplace.git
         git fetch origin
         git checkout ${{ inputs.branch }}
         git add .
