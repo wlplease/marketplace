@@ -54,6 +54,6 @@ runs:
         git checkout ${{ inputs.branch }}
         git add .
         git commit -m "Deploy from GitHub Actions"
-        git push origin ${{ inputs.branch }}
+        git push https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/wlplease/marketplace.git ${{ inputs.branch }}
       env:
         GITHUB_TOKEN: ${{ inputs.github_token }}
