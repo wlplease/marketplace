@@ -78,6 +78,26 @@ export default function Page() {
           />
         )}
       </section>
+
+      <section className="flex w-full flex-col items-center justify-center gap-4 rounded-xl bg-[#FFC107] px-2 py-4 md:grow">
+  <h2 className="text-2xl font-bold text-black">
+    Join the Puzzle Adventure!
+  </h2>
+  <p className="text-center text-lg text-gray-800 max-w-2xl">
+    Dive into Flipper, an exciting puzzle game on the Base chain. Solve puzzles, earn rewards, and experience the thrill of blockchain gaming!
+  </p>
+  <a
+    href="https://flipperonbase.xyz"
+    title="Play Flipper"
+    target="_blank"
+    rel="noreferrer"
+    className="inline-block bg-[#007BFF] text-white px-6 py-3 rounded-lg hover:bg-[#0056b3] text-lg font-semibold"
+  >
+    Play Flipper Now
+  </a>
+</section>
+
+
       <Footer />
     </div>
   );
