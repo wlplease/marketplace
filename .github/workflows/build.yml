@@ -1,4 +1,4 @@
-name: Template Build
+name: NOSEA Marketplace Build
 
 on:
   push:
@@ -11,21 +11,26 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [18.x]  # Specify the Node.js version to use
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js Environment
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
 
-      - name: Install dependencies
-        run: yarn install
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
 
-      - name: Build
-        # When fails, please check your build
+      - name: Install OnchainKit Dependencies
+        run: yarn add @coinbase/onchainkit
+
+      - name: Build Application
+        # Command to build the Next.js application
         run: yarn build
+
+      - name: Run OnchainKit Tasks
+        run: yarn onchainkit run

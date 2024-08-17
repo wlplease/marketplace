@@ -1,18 +1,56 @@
-name: Setup
+name: "NOSEA Marketplace Build and Deploy"
+
+description: "This action builds and deploys the NOSEA Marketplace project to GitHub."
+
+inputs:
+  node-version:
+    description: "The Node.js version to use for the build."
+    required: true
+    default: "18.x"
+  
+  branch:
+    description: "The branch to deploy."
+    required: true
+    default: "main"
+
+  github_token:
+    description: "GitHub token for pushing the deployment."
+    required: true
+    default: ${{ secrets.GITHUB_TOKEN }}
+
 runs:
-  using: composite
+  using: "composite"
   steps:
-    - uses: actions/setup-node@v4
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js Environment
+      uses: actions/setup-node@v3
       with:
-        node-version-file: '.nvmrc'
-        registry-url: https://registry.npmjs.org
-        cache: yarn
+        node-version: ${{ inputs.node-version }}
+        cache: "yarn"
 
-    # For provenance https://docs.npmjs.com/generating-provenance-statements#prerequisites
-    - name: Install npm 9.5
-      run: npm install -g npm@^9.5.0
-      shell: bash
-
-    - name: Install node modules
+    - name: Install Dependencies
       run: yarn install --frozen-lockfile
-      shell: bash
+
+    - name: Build Application
+      run: yarn build
+
+    - name: Run Tests
+      run: yarn test
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-artifacts
+        path: ./.next
+
+    - name: Deploy to GitHub Repository
+      run: |
+        git config --global user.name "wlplease"
+        git config --global user.email "wlpleasenft@gmail.com"
+        git add .
+        git commit -m "Deploy from GitHub Actions"
+        git push origin ${{ inputs.branch }}
+      env:
+        GITHUB_TOKEN: ${{ inputs.github_token }}

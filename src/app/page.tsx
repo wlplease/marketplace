@@ -2,7 +2,6 @@
 import Footer from 'src/components/Footer';
 import TransactionWrapper from 'src/components/TransactionWrapper';
 import WalletWrapper from 'src/components/WalletWrapper';
-import MintNFTComponent from '../components/MintNFTComponent'; // Import the MintNFTComponent
 import { useAccount } from 'wagmi';
 import LoginButton from '../components/LoginButton';
 import SignupButton from '../components/SignupButton';
@@ -54,16 +53,22 @@ export default function Page() {
             <TransactionWrapper address={address} />
             <section className="mt-8 w-full flex flex-col items-center bg-white p-6 rounded-xl">
               <h2 className="text-2xl font-semibold text-indigo-600">
-                Mint Your Own NFT
+                Explore and Trade NFTs
               </h2>
               <p className="text-center text-gray-700 mt-2 max-w-3xl">
-                Ready to create your own NFT on the Base Chain? Use our simple and secure minting tool to bring your digital assets to life. Whether it's art, music, or a unique collectible, your NFT will be stored immutably on the blockchain, giving you true ownership and control.
+                Dive into the NOSEA Marketplace to discover, buy, and trade unique NFTs on the Base Chain. Use the interface below to browse the available listings and manage your assets securely.
               </p>
               <p className="text-center text-gray-700 mt-2 max-w-3xl">
-                Start minting now and be part of the growing NOSEA community. Simply connect your wallet and follow the steps to mint your first NFT.
+                Mint our first marketplace NFT, the StarPop Based Duck, and be part of the exciting journey as it makes its debut. This unique NFT is now listed and ready for collectors to grab.
               </p>
-              {/* Replacing the placeholder link with the actual MintNFTComponent */}
-              <MintNFTComponent />
+              {/* Embed the iframe with the specified content */}
+              <iframe
+                src="https://embed.ipfscdn.io/ipfs/bafybeicd3qfzelz4su7ng6n523virdsgobrc5pcbarhwqv3dj3drh645pi/?contract=0x3CbFc93C108715Ae79a5c4cf0CD88c8fE1D16C33&chain=%7B%22name%22%3A%22Base%22%2C%22chain%22%3A%22ETH%22%2C%22rpc%22%3A%5B%22https%3A%2F%2F8453.rpc.thirdweb.com%2F%24%7BTHIRDWEB_API_KEY%7D%22%5D%2C%22nativeCurrency%22%3A%7B%22name%22%3A%22Ether%22%2C%22symbol%22%3A%22ETH%22%2C%22decimals%22%3A18%7D%2C%22shortName%22%3A%22base%22%2C%22chainId%22%3A8453%2C%22testnet%22%3Afalse%2C%22slug%22%3A%22base%22%2C%22icon%22%3A%7B%22url%22%3A%22ipfs%3A%2F%2FQmaxRoHpxZd8PqccAynherrMznMufG6sdmHZLihkECXmZv%22%2C%22width%22%3A1200%2C%22height%22%3A1200%2C%22format%22%3A%22png%22%7D%7D&clientId=1046918ab2f3857aaf21f9d68a2400dc&theme=dark&primaryColor=purple"
+                width="600px"
+                height="600px"
+                style={{ maxWidth: '100%' }}
+                frameBorder="0"
+              ></iframe>
             </section>
           </>
         ) : (

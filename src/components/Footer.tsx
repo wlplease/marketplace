@@ -12,7 +12,7 @@ import {
 import ArrowSvg from 'src/svg/ArrowSvg';
 
 const docLinks = [
-  { href: ONCHAINKIT_LINK, title: 'Docs' },
+  { href: 'https://nosea.xyz', title: 'Docs' }, // Updated docs link
   { href: GITHUB_LINK, title: 'Github' },
   { href: DISCORD_LINK, title: 'Discord' },
   { href: FIGMA_LINK, title: 'Figma' },
