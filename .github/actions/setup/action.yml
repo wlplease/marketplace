@@ -49,6 +49,9 @@ runs:
       run: |
         git config --global user.name "wlplease"
         git config --global user.email "wlpleasenft@gmail.com"
+        git remote add origin https://github.com/wlplease/onchain.git
+        git fetch origin
+        git checkout ${{ inputs.branch }}
         git add .
         git commit -m "Deploy from GitHub Actions"
         git push origin ${{ inputs.branch }}
