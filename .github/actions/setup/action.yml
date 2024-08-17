@@ -1,6 +1,6 @@
 name: "NOSEA Marketplace Build and Deploy"
 
-description: "This action builds and deploys the NOSEA Marketplace project to GitHub."
+description: "This action builds and deploys the NOSEA Marketplace project to Netlify."
 
 inputs:
   node-version:
@@ -13,10 +13,15 @@ inputs:
     required: true
     default: "main"
 
-  github_token:
-    description: "GitHub token for pushing the deployment."
+  netlify_auth_token:
+    description: "Netlify authentication token."
     required: true
-    default: ${{ secrets.GITHUB_TOKEN }}
+    default: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+  netlify_site_id:
+    description: "Netlify site ID for deployment."
+    required: true
+    default: ${{ secrets.NETLIFY_SITE_ID }}
 
 runs:
   using: "composite"
@@ -36,24 +41,13 @@ runs:
     - name: Build Application
       run: yarn build
 
-    - name: Run Tests
-      run: yarn test
+    - name: Export Static Files (if applicable)
+      run: yarn export
 
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v3
+    - name: Deploy to Netlify
+      uses: netlify/actions/cli@v1
       with:
-        name: build-artifacts
-        path: ./.next
-
-    - name: Deploy to GitHub Repository
-      run: |
-        git config --global user.name "wlplease"
-        git config --global user.email "wlpleasenft@gmail.com"
-        git remote set-url origin https://github.com/wlplease/marketplace.git
-        git fetch origin
-        git checkout ${{ inputs.branch }}
-        git add .
-        git commit -m "Deploy from GitHub Actions"
-        git push origin ${{ inputs.branch }} --force
+        args: deploy --dir=.next --prod  # Adjust the directory if you're using 'out'
       env:
-        GITHUB_TOKEN: ${{ inputs.github_token }}
+        NETLIFY_AUTH_TOKEN: ${{ inputs.netlify_auth_token }}
+        NETLIFY_SITE_ID: ${{ inputs.netlify_site_id }}
