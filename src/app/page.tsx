@@ -114,10 +114,7 @@ export default function Page() {
                 frameBorder="0"
               ></iframe>
             </section>
-          </>
-        )}
-      </div>
-
+       
      <div
   className="marketplace-section w-full max-w-3xl mx-auto p-6 rounded-xl"
   style={{ backgroundColor: "#92EAEB" }}
@@ -209,6 +206,11 @@ export default function Page() {
           Play Flipper Now
         </a>
       </section>
+
+   </>
+        )}
+      </div>
+
 
       <section className="flex w-full flex-col items-center justify-center gap-2 bg-[#F3F4F6] px-4 py-6 rounded-lg mt-8 w-full">
         <div className="flex gap-4">
