@@ -1,10 +1,16 @@
 'use client';
+
+import React from "react";
 import Footer from 'src/components/Footer';
 import TransactionWrapper from 'src/components/TransactionWrapper';
 import WalletWrapper from 'src/components/WalletWrapper';
 import { useAccount } from 'wagmi';
 import LoginButton from '../components/LoginButton';
 import SignupButton from '../components/SignupButton';
+import { createThirdwebClient, getContract } from "thirdweb";
+import { defineChain } from "thirdweb/chains";
+import { ThirdwebProvider, useReadContract } from "thirdweb/react";
+import { Avatar, Identity, Name, Badge, Address } from '@coinbase/onchainkit/identity';
 
 export default function Page() {
   const { address } = useAccount();
@@ -12,16 +18,26 @@ export default function Page() {
   return (
     <div className="flex h-full w-96 max-w-full flex-col px-1 md:w-[1008px]">
       <header className="mt-6 mb-6 flex w-full flex-col md:flex-row items-center justify-between bg-[#FFADDE] p-4 rounded-lg">
-        <div className="flex items-center justify-between gap-2 md:gap-0 w-full">
+        <div className="flex items-center gap-4 w-full md:w-auto">
+       
           <a
             href="https://nosea.xyz"
-            title="NOSEA"
+            title="NOSEA.xyz Base NFT Marketplace"
             target="_blank"
             rel="noreferrer"
             className="text-2xl font-bold text-white"
           >
             NOSEA
           </a>
+          <br />
+              {/* Identity Component */}
+          <Identity address="0x32737fee16F5C423664AB1B76c1684Bd2db06095" schemaId="0xf8b...">
+            <Avatar />
+            <Name>
+              <Badge />
+            </Name>
+          </Identity>
+          <br />
           <div className="flex items-center gap-3">
             <div className="bg-[#D4B1F0] text-white px-4 py-2 rounded-lg hover:bg-[#C69FE8]">
               <SignupButton />
@@ -29,39 +45,52 @@ export default function Page() {
             {!address && (
               <div className="bg-[#D4B1F0] text-white px-4 py-2 rounded-lg hover:bg-[#C69FE8]">
                 <LoginButton />
+                
               </div>
             )}
           </div>
         </div>
       </header>
-      <section className="templateSection flex w-full flex-col items-center justify-center gap-4 rounded-xl bg-[#ACBEFC] px-2 py-4 md:grow">
-        <h1 className="text-3xl font-bold text-white">
-          Welcome to NOSEA NFT Marketplace
-        </h1>
-        <p className="text-center text-lg text-gray-700 max-w-2xl">
-          Discover, collect, and trade unique NFTs on the Base Chain. Connect your wallet to start exploring the marketplace and manage your assets securely.
-        </p>
-        <div className="flex h-[450px] w-[450px] max-w-full items-center justify-center rounded-xl">
-          <div className="rounded-xl bg-[#F3F4F6] px-4 py-[11px]">
-            <p className="font-normal text-indigo-600 text-xl not-italic tracking-[-1.2px]">
-              Join our vibrant community today. Explore exclusive NFTs, connect with other collectors, and stay ahead in the digital marketplace.
-            </p>
-          </div>
-        </div>
+
+     <section
+  className="templateSection flex w-full flex-col items-center justify-center gap-6 rounded-xl p-6 md:grow"
+  style={{
+    backgroundImage: 'url("https://img.freepik.com/free-photo/blockchain-technology-background-gradient-blue_53876-124646.jpg?t=st=1723991324~exp=1723994924~hmac=7ac3fd377c662c64b52ec393d45e118e673bf0b45eabae76b97004c045503419&w=1480")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+  }}
+>
+  <h1 className="text-4xl font-bold text-white mb-4">
+    Welcome to NOSEA NFT Marketplace
+  </h1>
+  <p className="text-center text-lg text-white max-w-2xl mb-6">
+    Discover, collect, and trade unique NFTs on the Base Chain. Connect your wallet to explore the marketplace and manage your assets securely. Join our vibrant community today to access exclusive NFTs, connect with other collectors, and stay ahead in the digital marketplace.
+  </p>
+  <div className="flex h-[400px] w-full max-w-lg items-center justify-center rounded-xl shadow-lg">
+    <div className="rounded-xl bg-transparent p-6 text-center">
+      <p className="font-normal text-indigo-600 text-xl tracking-tight">
+        Ready to dive into the world of NFTs? Connect your wallet and start your journey in the NOSEA marketplace today!
+      </p>
+    </div>
+  </div>
+</section>
+
+
+      <div>
         {address ? (
           <>
             <TransactionWrapper address={address} />
             <section className="mt-8 w-full flex flex-col items-center bg-white p-6 rounded-xl">
               <h2 className="text-2xl font-semibold text-indigo-600">
-                Explore and Trade NFTs
+                NOSEA NFT Marketplace
               </h2>
               <p className="text-center text-gray-700 mt-2 max-w-3xl">
-                Dive into the NOSEA Marketplace to discover, buy, and trade unique NFTs on the Base Chain. Use the interface below to browse the available listings and manage your assets securely.
+                Welcome to the NOSEA NFT Marketplace, your gateway to discovering, buying, and trading unique NFTs on the Base Chain. Connect your wallet to access the full range of marketplace features and manage your digital assets securely.
               </p>
               <p className="text-center text-gray-700 mt-2 max-w-3xl">
-                Mint our first marketplace NFT, the StarPop Based Duck, and be part of the exciting journey as it makes its debut. This unique NFT is now listed and ready for collectors to grab.
+                Browse through our exclusive NFT collections, including the StarPop Based Duck—our first marketplace NFT. Don’t miss your chance to be a part of this exciting journey as it makes its debut in the digital marketplace.
               </p>
-              {/* Embed the iframe with the specified content */}
               <iframe
                 src="https://embed.ipfscdn.io/ipfs/bafybeicd3qfzelz4su7ng6n523virdsgobrc5pcbarhwqv3dj3drh645pi/?contract=0x3CbFc93C108715Ae79a5c4cf0CD88c8fE1D16C33&chain=%7B%22name%22%3A%22Base%22%2C%22chain%22%3A%22ETH%22%2C%22rpc%22%3A%5B%22https%3A%2F%2F8453.rpc.thirdweb.com%2F%24%7BTHIRDWEB_API_KEY%7D%22%5D%2C%22nativeCurrency%22%3A%7B%22name%22%3A%22Ether%22%2C%22symbol%22%3A%22ETH%22%2C%22decimals%22%3A18%7D%2C%22shortName%22%3A%22base%22%2C%22chainId%22%3A8453%2C%22testnet%22%3Afalse%2C%22slug%22%3A%22base%22%2C%22icon%22%3A%7B%22url%22%3A%22ipfs%3A%2F%2FQmaxRoHpxZd8PqccAynherrMznMufG6sdmHZLihkECXmZv%22%2C%22width%22%3A1200%2C%22height%22%3A1200%2C%22format%22%3A%22png%22%7D%7D&clientId=1046918ab2f3857aaf21f9d68a2400dc&theme=dark&primaryColor=purple"
                 width="600px"
@@ -74,12 +103,12 @@ export default function Page() {
         ) : (
           <WalletWrapper
             className="w-[450px] max-w-full"
-            text="Sign in to join the NOSEA community. Mint, Trade, Purchase NFTs"
+            text="Sign in to explore the NOSEA NFT Marketplace. Unlock exclusive NFTs and manage your digital assets."
           />
         )}
-      </section>
+      </div>
 
-      <section className="flex w-full flex-col items-center justify-center gap-4 rounded-xl bg-[#FFC107] px-2 py-4 md:grow">
+      <section className="flex w-full flex-col items-center justify-center gap-4 rounded-xl bg-[#ed32e4] px-2 py-4 md:grow">
         <h2 className="text-2xl font-bold text-black">
           Join the Puzzle Adventure!
         </h2>
@@ -97,7 +126,6 @@ export default function Page() {
         </a>
       </section>
 
-      {/* New Section for Terms and Privacy */}
       <section className="flex flex-col items-center justify-center gap-2 bg-[#F3F4F6] px-4 py-6 rounded-lg mt-8 w-full">
         <div className="flex gap-4">
           <a

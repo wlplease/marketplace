@@ -3,6 +3,16 @@
 export default function Terms() {
   return (
     <div className="container mx-auto p-6">
+      {/* Link to NOSEA homepage at the top */}
+      <a 
+        href="https://nosea.xyz" 
+        className="text-blue-500 hover:underline mb-4 block text-center"
+        target="_blank" 
+        rel="noreferrer"
+      >
+        Back to NOSEA Home
+      </a>
+
       <h1 className="text-3xl font-bold mb-6">Terms of Service</h1>
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
@@ -86,9 +96,19 @@ export default function Terms() {
       <section>
         <h2 className="text-2xl font-semibold mb-4">11. Contact Information</h2>
         <p>
-          If you have any questions or concerns regarding these terms, please contact us at support@nosea.xyz.
+          If you have any questions or concerns regarding these terms, please contact us at info@nosea.xyz.
         </p>
       </section>
+
+      {/* Link to NOSEA homepage at the bottom */}
+      <a 
+        href="https://nosea.xyz" 
+        className="text-blue-500 hover:underline mt-8 block text-center"
+        target="_blank" 
+        rel="noreferrer"
+      >
+        Back to NOSEA Home
+      </a>
     </div>
   );
 }
