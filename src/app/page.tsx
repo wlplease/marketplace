@@ -12,6 +12,20 @@ import { Avatar, Identity, Name, Badge } from '@coinbase/onchainkit/identity';
 export default function Page() {
   const { address } = useAccount();
 
+  // Define the createListing function with typed event parameter
+  const createListing = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = {
+      contractAddress: formData.get('contractAddress') as string,
+      tokenId: formData.get('tokenId') as string,
+      price: formData.get('price') as string,
+      listingType: formData.get('listingType') as string,
+    };
+    console.log("Creating listing with data:", data);
+    // Add logic to interact with the smart contract and create a listing
+  };
+
   return (
     <div className="flex h-full w-96 max-w-full flex-col px-1 md:w-[1008px]">
       <header className="mt-6 mb-6 flex w-full flex-col md:flex-row items-center justify-between bg-[#FFADDE] p-4 rounded-lg">
@@ -104,6 +118,80 @@ export default function Page() {
         )}
       </div>
 
+     <div
+  className="marketplace-section w-full max-w-3xl mx-auto p-6 rounded-xl"
+  style={{ backgroundColor: "#92EAEB" }}
+>
+  <h2 className="text-3xl font-bold text-indigo-800 mb-4 text-center">
+    Mint and List Your NFT
+  </h2>
+  <p className="text-lg text-gray-700 mb-6 text-center">
+    Easily create and list your NFT on the NOSEA Marketplace. Simply fill in the details below and get your NFT ready for trading on the Base Chain.
+  </p>
+  <form onSubmit={createListing} className="listing-form space-y-4">
+    <div className="form-group">
+      <label htmlFor="contractAddress" className="block font-medium text-gray-800">
+        NFT Contract Address
+      </label>
+      <input
+        type="text"
+        name="contractAddress"
+        id="contractAddress"
+        value="0x864586F3C1bDF6b9326BA6A0a765a91124C757cF"
+        readOnly
+        className="w-full p-2 border border-gray-300 rounded-lg"
+      />
+    </div>
+    <div className="form-group">
+      <label htmlFor="tokenId" className="block font-medium text-gray-800">
+        NFT Token ID
+      </label>
+      <input
+        type="text"
+        name="tokenId"
+        id="tokenId"
+        placeholder="Enter NFT Token ID"
+        required
+        className="w-full p-2 border border-gray-300 rounded-lg"
+      />
+    </div>
+    <div className="form-group">
+      <label htmlFor="price" className="block font-medium text-gray-800">
+        Sale Price (ETH)
+      </label>
+      <input
+        type="text"
+        name="price"
+        id="price"
+        placeholder="Enter Sale Price"
+        required
+        className="w-full p-2 border border-gray-300 rounded-lg"
+      />
+    </div>
+    <div className="form-group">
+      <label htmlFor="listingType" className="block font-medium text-gray-800">
+        Listing Type
+      </label>
+      <select
+        name="listingType"
+        id="listingType"
+        required
+        className="w-full p-2 border border-gray-300 rounded-lg"
+      >
+        <option value="directListing">Direct Listing</option>
+        <option value="auctionListing">Auction Listing</option>
+      </select>
+    </div>
+    <button
+      type="submit"
+      className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700"
+    >
+      Create Listing
+    </button>
+  </form>
+</div>
+
+
       <section className="flex w-full flex-col items-center justify-center gap-4 rounded-xl bg-[#ed32e4] px-2 py-4 md:grow">
         <h2 className="text-2xl font-bold text-black">
           Join the Puzzle Adventure!
@@ -122,7 +210,7 @@ export default function Page() {
         </a>
       </section>
 
-      <section className="flex flex-col items-center justify-center gap-2 bg-[#F3F4F6] px-4 py-6 rounded-lg mt-8 w-full">
+      <section className="flex w-full flex-col items-center justify-center gap-2 bg-[#F3F4F6] px-4 py-6 rounded-lg mt-8 w-full">
         <div className="flex gap-4">
           <a
             href="/terms"
@@ -145,4 +233,3 @@ export default function Page() {
     </div>
   );
 }
-
