@@ -34,13 +34,6 @@ export default function Page() {
           </Identity>
         </div>
 
-        {!address && (
-          <WalletWrapper
-            className="w-[450px] max-w-full"
-            text="Sign in to explore the NOSEA NFT Marketplace. Unlock exclusive NFTs and manage your digital assets."
-          />
-        )}
-
         <div className="flex items-center gap-3">
           <div className="bg-[#D4B1F0] text-white px-4 py-2 rounded-lg hover:bg-[#C69FE8]">
             <SignupButton />
@@ -53,8 +46,40 @@ export default function Page() {
         </div>
       </header>
 
+      <section
+        className="templateSection flex w-full flex-col items-center justify-center gap-6 rounded-xl p-6 md:grow"
+        style={{
+          backgroundImage: 'url("https://img.freepik.com/free-photo/blockchain-technology-background-gradient-blue_53876-124646.jpg?t=st=1723991324~exp=1723994924~hmac=7ac3fd377c662c64b52ec393d45e118e673bf0b45eabae76b97004c045503419&w=1480")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <h1 className="text-4xl font-bold text-white mb-4">
+          Welcome to NOSEA NFT Marketplace
+        </h1>
+        <p className="text-center text-lg text-white max-w-2xl mb-6">
+          Discover, collect, and trade unique NFTs on the Base Chain. Connect your wallet to explore the marketplace and manage your assets securely. Join our vibrant community today to access exclusive NFTs, connect with other collectors, and stay ahead in the digital marketplace.
+        </p>
+
+        {!address && (
+          <WalletWrapper
+            className="w-[450px] max-w-full"
+            text="Sign in to explore the NOSEA NFT Marketplace. Unlock exclusive NFTs and manage your digital assets."
+          />
+        )}
+
+        <div className="flex h-[400px] w-full max-w-lg items-center justify-center rounded-xl shadow-lg">
+          <div className="rounded-xl bg-transparent p-6 text-center">
+            <p className="font-normal text-indigo-600 text-xl tracking-tight">
+              Ready to dive into the world of NFTs? Connect your wallet and start your journey in the NOSEA marketplace today!
+            </p>
+          </div>
+        </div>
+      </section>
+
       <div>
-        {address ? (
+        {address && (
           <>
             <TransactionWrapper address={address} />
             <section className="mt-8 w-full flex flex-col items-center bg-white p-6 rounded-xl">
@@ -76,32 +101,8 @@ export default function Page() {
               ></iframe>
             </section>
           </>
-        ) : null}
+        )}
       </div>
-
-      <section
-        className="templateSection flex w-full flex-col items-center justify-center gap-6 rounded-xl p-6 md:grow"
-        style={{
-          backgroundImage: 'url("https://img.freepik.com/free-photo/blockchain-technology-background-gradient-blue_53876-124646.jpg?t=st=1723991324~exp=1723994924~hmac=7ac3fd377c662c64b52ec393d45e118e673bf0b45eabae76b97004c045503419&w=1480")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        <h1 className="text-4xl font-bold text-white mb-4">
-          Welcome to NOSEA NFT Marketplace
-        </h1>
-        <p className="text-center text-lg text-white max-w-2xl mb-6">
-          Discover, collect, and trade unique NFTs on the Base Chain. Connect your wallet to explore the marketplace and manage your assets securely. Join our vibrant community today to access exclusive NFTs, connect with other collectors, and stay ahead in the digital marketplace.
-        </p>
-        <div className="flex h-[400px] w-full max-w-lg items-center justify-center rounded-xl shadow-lg">
-          <div className="rounded-xl bg-transparent p-6 text-center">
-            <p className="font-normal text-indigo-600 text-xl tracking-tight">
-              Ready to dive into the world of NFTs? Connect your wallet and start your journey in the NOSEA marketplace today!
-            </p>
-          </div>
-        </div>
-      </section>
 
       <section className="flex w-full flex-col items-center justify-center gap-4 rounded-xl bg-[#ed32e4] px-2 py-4 md:grow">
         <h2 className="text-2xl font-bold text-black">
@@ -144,3 +145,4 @@ export default function Page() {
     </div>
   );
 }
+
