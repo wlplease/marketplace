@@ -1,6 +1,6 @@
 'use client';
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from 'src/components/Footer';
 import TransactionWrapper from 'src/components/TransactionWrapper';
 import WalletWrapper from 'src/components/WalletWrapper';
@@ -8,9 +8,30 @@ import { useAccount } from 'wagmi';
 import LoginButton from '../components/LoginButton';
 import SignupButton from '../components/SignupButton';
 import { Avatar, Identity, Name, Badge } from '@coinbase/onchainkit/identity';
+import { readContract } from "thirdweb"; // Ensure proper import from thirdweb or your contract library
 
 export default function Page() {
   const { address } = useAccount();
+  const [listings, setListings] = useState<any[]>([]); // Adjust type as needed for your listings
+
+  // Fetch listings
+  useEffect(() => {
+    async function fetchListings() {
+      try {
+        const contractAddress = "0x864586F3C1bDF6b9326BA6A0a765a91124C757cF";
+        const data = await (readContract as any)({
+          contract: contractAddress,
+          method: "getAllValidListings",
+          params: [0, 100],
+        });
+        setListings(data);
+      } catch (error) {
+        console.error("Failed to fetch listings:", error);
+      }
+    }
+
+    fetchListings();
+  }, []);
 
   // Define the createListing function with typed event parameter
   const createListing = (event: React.FormEvent<HTMLFormElement>) => {
@@ -114,103 +135,124 @@ export default function Page() {
                 frameBorder="0"
               ></iframe>
             </section>
-       
-     <div
-  className="marketplace-section w-full max-w-3xl mx-auto p-6 rounded-xl"
-  style={{ backgroundColor: "#92EAEB" }}
->
-  <h2 className="text-3xl font-bold text-indigo-800 mb-4 text-center">
-    Mint and List Your NFT
-  </h2>
-  <p className="text-lg text-gray-700 mb-6 text-center">
-    Easily create and list your NFT on the NOSEA Marketplace. Simply fill in the details below and get your NFT ready for trading on the Base Chain.
-  </p>
-  <form onSubmit={createListing} className="listing-form space-y-4">
-    <div className="form-group">
-      <label htmlFor="contractAddress" className="block font-medium text-gray-800">
-        NFT Contract Address
-      </label>
-      <input
-        type="text"
-        name="contractAddress"
-        id="contractAddress"
-        value="0x864586F3C1bDF6b9326BA6A0a765a91124C757cF"
-        readOnly
-        className="w-full p-2 border border-gray-300 rounded-lg"
-      />
-    </div>
-    <div className="form-group">
-      <label htmlFor="tokenId" className="block font-medium text-gray-800">
-        NFT Token ID
-      </label>
-      <input
-        type="text"
-        name="tokenId"
-        id="tokenId"
-        placeholder="Enter NFT Token ID"
-        required
-        className="w-full p-2 border border-gray-300 rounded-lg"
-      />
-    </div>
-    <div className="form-group">
-      <label htmlFor="price" className="block font-medium text-gray-800">
-        Sale Price (ETH)
-      </label>
-      <input
-        type="text"
-        name="price"
-        id="price"
-        placeholder="Enter Sale Price"
-        required
-        className="w-full p-2 border border-gray-300 rounded-lg"
-      />
-    </div>
-    <div className="form-group">
-      <label htmlFor="listingType" className="block font-medium text-gray-800">
-        Listing Type
-      </label>
-      <select
-        name="listingType"
-        id="listingType"
-        required
-        className="w-full p-2 border border-gray-300 rounded-lg"
-      >
-        <option value="directListing">Direct Listing</option>
-        <option value="auctionListing">Auction Listing</option>
-      </select>
-    </div>
-    <button
-      type="submit"
-      className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700"
-    >
-      Create Listing
-    </button>
-  </form>
-</div>
 
+            <div className="marketplace-listings-section bg-[#92EAEB] p-6 rounded-xl mt-8">
+              <h2 className="text-3xl font-bold text-center text-indigo-600 mb-4">Marketplace Listings</h2>
+              <p className="text-center text-lg text-gray-700 mb-6">
+                Browse through the available NFTs listed in the NOSEA marketplace. Connect your wallet to make a purchase or place a bid on your desired items.
+              </p>
+                            <div className="listings-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {listings.length > 0 ? (
+                  listings.map((listing) => (
+                    <div key={listing.listingId} className="listing-item bg-white p-4 rounded-lg shadow-md">
+                      <h3 className="text-xl font-semibold mb-2">NFT #{listing.tokenId}</h3>
+                      <p className="text-gray-600">Price: {listing.pricePerToken} ETH</p>
+                      <p className="text-gray-600">Quantity: {listing.quantity}</p>
+                      <p className="text-gray-600">Creator: {listing.listingCreator}</p>
+                      <button className="mt-4 w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-500">
+                        Buy Now
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-center text-gray-600">No listings available at the moment.</p>
+                )}
+              </div>
+            </div>
 
-      <section className="flex w-full flex-col items-center justify-center gap-4 rounded-xl bg-[#ed32e4] px-2 py-4 md:grow">
-        <h2 className="text-2xl font-bold text-black">
-          Join the Puzzle Adventure!
-        </h2>
-        <p className="text-center text-lg text-gray-800 max-w-2xl">
-          Dive into Flipper, an exciting puzzle game on the Base chain. Solve puzzles, earn rewards, and experience the thrill of blockchain gaming!
-        </p>
-        <a
-          href="https://flipperonbase.xyz"
-          title="Play Flipper"
-          target="_blank"
-          rel="noreferrer"
-          className="inline-block bg-[#007BFF] text-white px-6 py-3 rounded-lg hover:bg-[#0056b3] text-lg font-semibold"
-        >
-          Play Flipper Now
-        </a>
-      </section>
+            <div
+              className="marketplace-section w-full max-w-3xl mx-auto p-6 rounded-xl"
+              style={{ backgroundColor: "#92EAEB" }}
+            >
+              <h2 className="text-3xl font-bold text-indigo-800 mb-4 text-center">
+                Mint and List Your NFT
+              </h2>
+              <p className="text-lg text-gray-700 mb-6 text-center">
+                Easily create and list your NFT on the NOSEA Marketplace. Simply fill in the details below and get your NFT ready for trading on the Base Chain.
+              </p>
+              <form onSubmit={createListing} className="listing-form space-y-4">
+                <div className="form-group">
+                  <label htmlFor="contractAddress" className="block font-medium text-gray-800">
+                    NFT Contract Address
+                  </label>
+                  <input
+                    type="text"
+                    name="contractAddress"
+                    id="contractAddress"
+                    value="0x864586F3C1bDF6b9326BA6A0a765a91124C757cF"
+                    readOnly
+                    className="w-full p-2 border border-gray-300 rounded-lg"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="tokenId" className="block font-medium text-gray-800">
+                    NFT Token ID
+                  </label>
+                  <input
+                    type="text"
+                    name="tokenId"
+                    id="tokenId"
+                    placeholder="Enter NFT Token ID"
+                    required
+                    className="w-full p-2 border border-gray-300 rounded-lg"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="price" className="block font-medium text-gray-800">
+                    Sale Price (ETH)
+                  </label>
+                  <input
+                    type="text"
+                    name="price"
+                    id="price"
+                    placeholder="Enter Sale Price"
+                    required
+                    className="w-full p-2 border border-gray-300 rounded-lg"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="listingType" className="block font-medium text-gray-800">
+                    Listing Type
+                  </label>
+                  <select
+                    name="listingType"
+                    id="listingType"
+                    required
+                    className="w-full p-2 border border-gray-300 rounded-lg"
+                  >
+                    <option value="directListing">Direct Listing</option>
+                    <option value="auctionListing">Auction Listing</option>
+                  </select>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700"
+                >
+                  Create Listing
+                </button>
+              </form>
+            </div>
 
-   </>
+            <section className="flex w-full flex-col items-center justify-center gap-4 rounded-xl bg-[#ed32e4] px-2 py-4 md:grow">
+              <h2 className="text-2xl font-bold text-black">
+                Join the Puzzle Adventure!
+              </h2>
+              <p className="text-center text-lg text-gray-800 max-w-2xl">
+                Dive into Flipper, an exciting puzzle game on the Base chain. Solve puzzles, earn rewards, and experience the thrill of blockchain gaming!
+              </p>
+              <a
+                href="https://flipperonbase.xyz"
+                title="Play Flipper"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block bg-[#007BFF] text-white px-6 py-3 rounded-lg hover:bg-[#0056b3] text-lg font-semibold"
+              >
+                Play Flipper Now
+              </a>
+            </section>
+          </>
         )}
       </div>
-
 
       <section className="flex w-full flex-col items-center justify-center gap-2 bg-[#F3F4F6] px-4 py-6 rounded-lg mt-8 w-full">
         <div className="flex gap-4">
