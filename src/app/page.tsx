@@ -219,8 +219,8 @@ export default function Page() {
                     type="text"
                     name="contractAddress"
                     id="contractAddress"
-                    value="0x864586F3C1bDF6b9326BA6A0a765a91124C757cF"
-                    readOnly
+                    value="Enter NFT Token Contract Address"
+                    
                     className="w-full p-2 border border-gray-300 rounded-lg"
                   />
                 </div>
