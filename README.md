@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/coinbase/onchainkit/main/site/docs/public/logo/v0-27.png">
-    <img alt="OnchainKit logo vibes" src="https://raw.githubusercontent.com/coinbase/onchainkit/main/site/docs/public/logo/v0-27.png" width="auto">
+    <source media="(prefers-color-scheme: dark)" srcset="https://www.google.com/url?sa=i&url=https%3A%2F%2Fbsc.news%2Fpost%2Fbase-chain-set-to-launch-with-100-eth-grants-for-builders-and-creators&psig=AOvVaw0qAjYNnR3XNg26nQ6uT_5V&ust=1724122187654000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOiCnYCGgIgDFQAAAAAdAAAAABAE">
+    <img alt="OnchainKit logo vibes" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fbsc.news%2Fpost%2Fbase-chain-set-to-launch-with-100-eth-grants-for-builders-and-creators&psig=AOvVaw0qAjYNnR3XNg26nQ6uT_5V&ust=1724122187654000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOiCnYCGgIgDFQAAAAAdAAAAABAE" width="auto">
   </picture>
 </p>
 
