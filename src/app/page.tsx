@@ -140,7 +140,7 @@ export default function Page() {
             <TransactionWrapper address={address} />
 <section className="mt-8 w-full flex flex-col items-center bg-white p-6 rounded-xl">
    <h2 className="text-2xl font-semibold text-indigo-600">
-                Quackintosh Base Ducking on Chain
+                Quackintosh Base Ducking on Chain - Pay with Base ETH
               </h2>
                <p className="text-center text-gray-700 mt-2 max-w-3xl">
                 Mint one of ten of StarPops Base Duck Friends
@@ -150,7 +150,25 @@ export default function Page() {
     src="https://embed.ipfscdn.io/ipfs/bafybeicd3qfzelz4su7ng6n523virdsgobrc5pcbarhwqv3dj3drh645pi/?contract=0x1dcc3a887045312B76bcA6ac57Cc3967dED1Afd5&chain=%7B%22name%22%3A%22Base%22%2C%22chain%22%3A%22ETH%22%2C%22rpc%22%3A%5B%22https%3A%2F%2F8453.rpc.thirdweb.com%2F%24%7BTHIRDWEB_API_KEY%7D%22%5D%2C%22nativeCurrency%22%3A%7B%22name%22%3A%22Ether%22%2C%22symbol%22%3A%22ETH%22%2C%22decimals%22%3A18%7D%2C%22shortName%22%3A%22base%22%2C%22chainId%22%3A8453%2C%22testnet%22%3Afalse%2C%22slug%22%3A%22base%22%2C%22icon%22%3A%7B%22url%22%3A%22ipfs%3A%2F%2FQmaxRoHpxZd8PqccAynherrMznMufG6sdmHZLihkECXmZv%22%2C%22width%22%3A1200%2C%22height%22%3A1200%2C%22format%22%3A%22png%22%7D%7D&clientId=1046918ab2f3857aaf21f9d68a2400dc&theme=system&primaryColor=purple"
     width="600px"
     height="600px"
-    style={{ maxWidth: '100%' }}
+      style={{ maxWidth: '100%' }}
+    frameBorder="0"
+  ></iframe>
+</section>
+
+ <TransactionWrapper address={address} />
+<section className="mt-8 w-full flex flex-col items-center bg-white p-6 rounded-xl">
+   <h2 className="text-2xl font-semibold text-indigo-600">
+                Quackintosh Base Ducking on Chain - Pay with Quack
+              </h2>
+               <p className="text-center text-gray-700 mt-2 max-w-3xl">
+                Mint one of ten of StarPops Base Duck Friends
+              </p>
+ 
+ <iframe
+    src="https://embed.ipfscdn.io/ipfs/bafybeicd3qfzelz4su7ng6n523virdsgobrc5pcbarhwqv3dj3drh645pi/?contract=0x808edA92DC7e03d56A448CdcaBF6F2EA986a779F&chain=%7B%22name%22%3A%22Base%22%2C%22chain%22%3A%22ETH%22%2C%22rpc%22%3A%5B%22https%3A%2F%2F8453.rpc.thirdweb.com%2F%24%7BTHIRDWEB_API_KEY%7D%22%5D%2C%22nativeCurrency%22%3A%7B%22name%22%3A%22Ether%22%2C%22symbol%22%3A%22ETH%22%2C%22decimals%22%3A18%7D%2C%22shortName%22%3A%22base%22%2C%22chainId%22%3A8453%2C%22testnet%22%3Afalse%2C%22slug%22%3A%22base%22%2C%22icon%22%3A%7B%22url%22%3A%22ipfs%3A%2F%2FQmaxRoHpxZd8PqccAynherrMznMufG6sdmHZLihkECXmZv%22%2C%22width%22%3A1200%2C%22height%22%3A1200%2C%22format%22%3A%22png%22%7D%7D&clientId=1046918ab2f3857aaf21f9d68a2400dc&theme=dark&primaryColor=teal"
+    width="600px"
+    height="600px"
+      style={{ maxWidth: '100%' }}
     frameBorder="0"
   ></iframe>
 </section>
@@ -297,6 +315,3 @@ export default function Page() {
     </div>
   );
 }
-
-
-
