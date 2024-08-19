@@ -219,7 +219,7 @@ export default function Page() {
                     type="text"
                     name="contractAddress"
                     id="contractAddress"
-                    value="Enter NFT Token Contract Address"
+                    placeholder="Enter NFT Token Contract Address"
                     
                     className="w-full p-2 border border-gray-300 rounded-lg"
                   />
