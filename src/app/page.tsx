@@ -60,22 +60,13 @@ export default function Page() {
           >
             NOSEA
           </a>
-          </div>
-          <div>
-       {address && (
-  <Identity
-    address={address}
-    schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
-  >
-    <Avatar>
-      <Badge className="bg-error" />
-    </Avatar>
-    <Name className="text-purple-600" />
-    <address className="text-blue-300 font-bold"/>
-  </Identity>
-)}
-
-
+          {/* Identity Component */}
+          <Identity address="0x32737fee16F5C423664AB1B76c1684Bd2db06095" schemaId="0xf8b...">
+            <Avatar />
+            <Name>
+              <Badge />
+            </Name>
+          </Identity>
         </div>
 
         <div className="flex items-center gap-3">
@@ -88,7 +79,9 @@ export default function Page() {
             </div>
           )}
         </div>
+  
       </header>
+
 
  <section
   className="templateSection flex w-full flex-col items-center justify-center gap-4 rounded-xl p-4"
@@ -119,7 +112,7 @@ export default function Page() {
       <div>
         {address && (
           <>
-            <TransactionWrapper address={address} />
+           
             <section className="mt-8 w-full flex flex-col items-center bg-white p-6 rounded-xl">
               <h2 className="text-2xl font-semibold text-indigo-600">
     NOSEA NFT Marketplace
